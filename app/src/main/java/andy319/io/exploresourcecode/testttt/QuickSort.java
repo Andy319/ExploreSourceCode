@@ -8,12 +8,12 @@ package andy319.io.exploresourcecode.testttt;
  */
 public class QuickSort {
 
-    static int array[] = {8, 9, 3, 4, 5, 1, 2, 6, 7};
+    static int array[] = {8, 9, 3, 4, 5, 1, 2, 6, 7,90,56,4,33};
 
     public static void main(String args[]) {
         quickSort(0,array.length-1);
         for (int i=0;i<array.length;i++){
-            System.out.println(i);
+            System.out.println(array[i]);
         }
 
 

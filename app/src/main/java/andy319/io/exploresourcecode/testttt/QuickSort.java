@@ -8,7 +8,7 @@ package andy319.io.exploresourcecode.testttt;
  */
 public class QuickSort {
 
-    static int array[] = {8, 9, 3, 4, 5, 1, 2, 6, 7,90,56,4,33};
+    static int array[] = {100, 9, 3, 4, 5, 1, 2, 6, 7,90,56,4,33};
 
     public static void main(String args[]) {
         quickSort(0,array.length-1);
@@ -33,6 +33,7 @@ public class QuickSort {
             }
             while (array[i]<=temp&&i<j){ //从左边找第一个比基准值大的
                 i++;
+                System.out.println("i="+i);
             }
             //将这两个值交换
             if(i<j){

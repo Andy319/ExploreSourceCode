@@ -1,54 +1,62 @@
 apply plugin: 'com.android.application'
+apply plugin: 'AndResGuard'
+apply plugin: 'img-optimizer'
+
 
 android {
-    compileSdkVersion 27
-    defaultConfig {
-        applicationId "andy319.io.exploresourcecode"
-        minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+    defaultConfig {
+        applicationId 'andy319.io.exploresourcecode'
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
+
+
+        ndk {
+            abiFilters 'armeabi-v7a' //,'x86'//, 'armeabi' //, 'mips'
+        }
+        resConfigs 'zh', 'en'
+        multiDexEnabled true
+
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    // test
+    testCompile "junit:junit:4.12"
+
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_version", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    // support libs
+    compile "com.android.support:support-v4:$support_lib_version"
+    compile "com.android.support:appcompat-v7:$support_lib_version"
+
+
+}
+
+
+
+/**
+ * 运行 assemble 任务之后清除所有 -unaligned 包
+ */
+assemble.doLast {
+    def buildPath = rootProject.childProjects.app.buildDir.absolutePath
+    def apkDirPath = "$buildPath${File.separator}outputs${File.separator}apk"
+    def apkDir = new File(apkDirPath)
+    if (apkDir.isDirectory()) {
+        apkDir.listFiles().each {
+            if (it.name.contains('-unaligned')) it.delete()
         }
     }
 }
 
-def supportVersion = '27.1.0'
-def retrofitVersion = '2.4.0'
-def rxlifecycleVersion = '2.2.1'
-def glideVersion = '4.6.1'
-def stethoVersion = '1.5.0'
-def butterKnifeVersion = '8.8.1'
-
-def rxJavaVersion = "2.1.12"
-def rxandroidVersion = "2.0.2"
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-
-    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
-
-    // dagger
-    implementation 'com.google.dagger:dagger:2.15'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
-    provided 'javax.annotation:jsr250-api:1.0'
-
-    //rx
-    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
-    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
-    implementation "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}"
-}

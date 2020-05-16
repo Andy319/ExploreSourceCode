@@ -1,14 +1,12 @@
 package andy319.io.exploresourcecode;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.SparseArray;
 
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

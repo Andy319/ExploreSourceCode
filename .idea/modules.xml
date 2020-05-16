@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ExploreSourceCode.iml" filepath="$PROJECT_DIR$/ExploreSourceCode.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExploreSourceCode.iml" filepath="$PROJECT_DIR$/ExploreSourceCode.iml" group="ExploreSourceCode" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ExploreSourceCode/app" />
     </modules>
   </component>
 </project>

@@ -16,6 +16,7 @@ public class LinkedList {
     private Node mergeTwoList(Node n1,Node n2){
 
         Node head=null;
+
         if(n1==null){
             return n2;
         }
